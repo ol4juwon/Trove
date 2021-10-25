@@ -1,7 +1,7 @@
 "use strict";
 const debug = require("debug")("äpp:debug");
 const { number } = require("@hapi/joi");
-
+const loan = require("./LoanModel");
 const portfolioService = require("../portfolio/PortfolioService");
 const loanService = require("./LoanService");
 
@@ -40,8 +40,18 @@ exports.createLoan = async (req, res, next) => {
 };
 
 exports.applyLoan = async (req,res,next) => {
+  const payload  = req.body;
 
-  this.createLoan
+  // verify user can take loan
+  console.log(payload)
+const {userId} = payload;
+  let {error, data } = await loanService.createLoan(payload);
+  if(error) return createErrorResponse(res, error, 413);
+   error, data  = await loanService.applyLoan(data,userId);
+  
+if(error) return createErrorResponse(res,error, 413);
+// update loans 
 
-  return createSuccessResponse(res,"loan applied", 200)
+// return success/ failure
+  return createSuccessResponse(res,data, 200)
 }

@@ -3,8 +3,14 @@ const cron = require("node-cron");
 const debug = require("debug")("app:debug");
 console.log("init Cron Service")
 
-debug("Cron service to keep Trove alive")
-cron.schedule("00 59 * * * *", () => {
+console.log("Cron service to keep Trove alive")
+cron.schedule("1 * * * * *", () => {
 
     console.log("cron")
 }, {});
+
+console.log("Payment Cron runs every midnight")
+cron.schedule("59 23 * * * ",() => {
+    // TODO: 
+    console.log("Payment cron ")
+})
