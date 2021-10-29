@@ -2,6 +2,7 @@
 const moment = require("moment");
 const LoanModel = require("./LoanModel");
 const interestRate = parseFloat(process.env.LOAN_RATE);
+const paymentService  = require("../payments/PaymentService")
 exports.createLoan = async (payload) => {
     const {amount, loanDuration} = payload;
 
@@ -30,16 +31,18 @@ exports.createLoan = async (payload) => {
 }
 
 exports.applyLoan = async (payload, userId) => { 
-    console.log("payload.datum ",payload)
+    // console.log("payload.datum ",payload)
 const {paymentSchedule,months,totalAmount} = payload;
     const loan = new LoanModel({
         userId,paymentSchedule,months,totalAmount
     })
-
-    const {error, data} = await loan.save();
-    
+const payments  = await paymentService.addPaymentSchedule(paymentSchedule,userId);
+    const bokl = await loan.save();
+    const {error } = bokl;
+    // console.log("Payments"+ payments)
+    // console.log("Service ",bokl)
     if(error) return { error : error};
 
-    return { data: data};
+    return { data: bokl};
 
 }

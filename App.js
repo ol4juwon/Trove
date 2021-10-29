@@ -86,6 +86,7 @@ console.log(url)
 app.use('/',require("./routes/home"))
 app.use('/api/v1', require("./routes/v1"))
 
+
 app.use((req, res, next) => {
     return next(createError(404));
 });

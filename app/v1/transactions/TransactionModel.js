@@ -3,8 +3,7 @@
 const mongoose = require("mongoose");
 let mongoosePaginate = require("mongoose-paginate");
 
-
-const paymentSchema = mongoose.Schema(
+const transactionSchema = mongoose.Schema(
     {
       amount: { type: Number, required: true },
       paymentDate: { type: Date, required: true },
@@ -20,8 +19,7 @@ const paymentSchema = mongoose.Schema(
 
   
 
-
-paymentSchema.index({ "$**": "text" });
-paymentSchema.plugin(mongoosePaginate);
-const myModel =  mongoose.model("Payments", paymentSchema);
+transactionSchema.index({ "$**": "text" });
+transactionSchema.plugin(mongoosePaginate);
+const myModel =  mongoose.model("transactions", transactionSchema);
 module.exports = myModel

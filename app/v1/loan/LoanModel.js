@@ -9,6 +9,7 @@ const paymentScheduleSchema = mongoose.Schema(
       monthlyPay: { type: Number, required: true },
       repayment_date: { type: Date, required: true },
       paid: { type: Boolean, default: false },
+      
     },
     {
       timestamps: true,
@@ -20,7 +21,9 @@ const loanSchema =  mongoose.Schema(
     userId: { type: String, required: true },
     paymentSchedule: {type: [paymentScheduleSchema] , required: true},
     months: {type: Number, required: true},
-    totalAmount: {type : Number, required: true }
+    totalAmount: {type : Number, required: true },
+    amountPaid : {type: Number},
+    card_id:{type: String}
   },
   {
     toJSON: {
