@@ -6,6 +6,7 @@ const paystack = require("../../../services/PaystackService");
 const card = require("../../cards/CardModel");
 const user = require("../../v1/user/UserModel");
 const { nanoid } = require("nanoid");
+const LoanModel = require("../loan/LoanModel");
 
 exports.repayLoan = async (req, res, next) => {
   let payload = req.body;
@@ -18,6 +19,7 @@ exports.repayLoan = async (req, res, next) => {
     email: email,
     transactionId: transactionId,
     loanId: loanId,
+    repayment: true,
   };
   let repay;
   if (cardAuth) {
@@ -37,8 +39,9 @@ exports.repayLoan = async (req, res, next) => {
       payload.metadata
     );
   }
-//   console.log(repay);
-return  createSuccessResponse(res, repay.data, 202);
+  console.log("repay", repay);
+// return  createSuccessResponse(res, repay.data, 202);
+return createSuccessResponse(res, "Data", 202);
 };
 exports.verifying = async (req, res, next) => {
   console.log(" verify paystack", req.query.trxref, req.query.reference);
@@ -84,6 +87,11 @@ exports.verifying = async (req, res, next) => {
       customer: `${customer}`,
     });
   }
+  //  add amount to repaid and update loan
+
+  const updateLoan = LoanModel.findOneAndUpdate({_id: metadata.data.loanId}, { $inc : {'amountPaid': amount}})
+
+
   return createSuccessResponse(
     res,
     { amount, channel, authorization, status, requested_amount, currency },

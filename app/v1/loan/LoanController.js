@@ -13,12 +13,19 @@ exports.getLoanStatus = async (req, res, next) => {
   const payload = req.body;
   const { userId } = payload;
   const { totalValue } = await portfolioService.getPortfolioValue(userId);
-  const availableLoan = totalValue * 0.6;
+  const availableLoan = parseInt(totalValue * 0.6);
   console.log("Available loan ", availableLoan);
 
   return createSuccessResponse(res, { availableLoan }, 200);
 };
-
+exports.viewActive = async (req, res, next) => {
+  const { userId } = req.body;
+  const loanActive = await loan.find({ userId: userId }, { paid: false, });
+  const { error } = loanActive;
+  console.log("acvtie loan", loanActive);
+  if (error) return createErrorResponse(res, error, 403);
+  return createSuccessResponse(res, loanActive, 202);
+};
 exports.createLoan = async (req, res, next) => {
   const payload = req.body;
   const { userId, amount, loanDuration } = payload;
@@ -66,18 +73,18 @@ exports.applyLoan = async (req, res, next) => {
 
   if (book.error) return createErrorResponse(res, error, 413);
   const hasCard = await cardModel.findOne({ userId: userId });
-const metadata =  {
-  userId : userId
-}
+  const metadata = {
+    userId: userId,
+  };
   if (!hasCard) {
     const paylink = await paystackService.initialize(
       10,
       null,
       book._id,
       applicant.email,
-      metadata   
+      metadata
     );
-    if(paylink.data) return createSuccessResponse(res,paylink.data, 203);
+    if (paylink.data) return createSuccessResponse(res, paylink.data, 203);
     console.log("paylink ", paylink.data);
   }
 

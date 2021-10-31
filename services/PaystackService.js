@@ -20,7 +20,7 @@ class PaystackService {
         this.email = "olajuwonlawal2012@gmail.com";
     }
 
-    async initialize(amount, redirectUrl = "http://localhost:4000/callback/", reference , email = "olajuwonlawal2012@gmail.com",metadata) {
+    async initialize(amount, redirectUrl = "http://localhost:4000/callback/", reference , email,metadata) {
         
     try {
             console.log("Email", email);
@@ -37,7 +37,7 @@ class PaystackService {
             return response.data;
         } catch (e) {
             console.log("juwon",e.message);
-            // throw new CustomPaystackError(e);
+            throw new CustomPaystackError(e);
         }
     }
 
@@ -72,8 +72,8 @@ class PaystackService {
             console.log("Response", JSON.stringify(response.data));
             return response.data;
         } catch (e) {
-            console.log("paystack charge error---", e.message, e.response);
-            logger(e.message, e.stack, {
+            // console.log("paystack charge error---", e.message, e.response);
+            console.log(e.message, e.stack, {
                 error: handleAxiosError(e),
                 transactionId,
                 chargeAuth,
@@ -84,7 +84,7 @@ class PaystackService {
                 statue: false,
                 message: e.message
             };
-            // throw new CustomPaystackError(e);
+            throw new CustomPaystackError(e);
         }
     };
 
