@@ -11,6 +11,7 @@ const paymentSchema = mongoose.Schema(
       status: { type: String, default: "pending" },
       userId: {type: String, required: true},
       retries: { type: Number},
+      loanId: {type: String, required: true},
       successfulOn: {type : Date}
     },
     {

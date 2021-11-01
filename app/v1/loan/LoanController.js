@@ -20,7 +20,7 @@ exports.getLoanStatus = async (req, res, next) => {
 };
 exports.viewActive = async (req, res, next) => {
   const { userId } = req.body;
-  const loanActive = await loan.find({ userId: userId }, { paid: false, });
+  const loanActive = await loan.find({ userId: userId , paid: false });
   const { error } = loanActive;
   console.log("acvtie loan", loanActive);
   if (error) return createErrorResponse(res, error, 403);

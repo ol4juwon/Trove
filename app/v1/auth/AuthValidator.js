@@ -7,12 +7,12 @@ exports.registerValidation = ( req,res,next) => {
 console.log("Before Validating ===> ", req.body)
     const schema = Joi.object( {
         firstName: Joi.string().min(4).required(),
-        lastName: Joi.string().min(4).required,
+        lastName : Joi.string().min(4).required(),
         email: Joi.string().min(6).required().email(),
         password: Joi.string().min(6).required(),
         address: Joi.string().min(6).required(),
         phone: Joi.string().min(8).required(),
-        img_src : Joi.string().required(),
+        
         userType: Joi.number().required()
     
     })

@@ -39,9 +39,27 @@ exports.repayLoan = async (req, res, next) => {
       payload.metadata
     );
   }
-  console.log("repay", repay);
+  // console.log("repay", repay);
+  // const paymentUpdate = await paymentModel.findByIdAndUpdate({_id : paym})
+  const payLoan = await LoanModel.findByIdAndUpdate({_id :loanId}, {$inc :  {'amountPaid' : (repay.data.amount/100)}});
 // return  createSuccessResponse(res, repay.data, 202);
-return createSuccessResponse(res, "Data", 202);
+console.log("Payload ",payLoan)
+const remainingBalnce  = payLoan.totalAmount - payLoan.amountPaid;
+
+if(payLoan.totalAmount === payLoan.amountPaid){
+const fullyPaidLoan = await LoanModel.findByIdAndUpdate({_id : loanId}, {paid: true});
+if(fullyPaidLoan.error) return createErrorResponse(res,fullyPaidLoan.error, EXC001);
+return createSuccessResponse(res, "Loan fully paid ", 200 );
+};
+if(payLoan.amountPaid > payLoan.totalAmount){
+  const walletBalance  = payLoan.amountPaid - payLoan.totalAmount ;
+  
+const fullyPaidLoan = await LoanModel.findByIdAndUpdate({_id : loanId}, {paid: true});
+console.log("paid ",fullyPaidLoan)
+ const updateWallet  = await  user.findByIdAndUpdate({_id : userId}, {$inc  :{ 'wallet': walletBalance}});
+ if(updateWallet.error) return createErrorResponse(res, updateWallet, 403);
+}
+return createSuccessResponse(res, {remainingBalnce}, 202);
 };
 exports.verifying = async (req, res, next) => {
   console.log(" verify paystack", req.query.trxref, req.query.reference);

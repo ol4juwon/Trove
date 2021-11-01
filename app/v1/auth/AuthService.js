@@ -104,7 +104,7 @@ exports.createUser = async (payload) => {
   user.token = token;
 
   const userd = await user.save();
-  console.log(userd);
+  console.log("Done ser ",userd);
   const { error, data } = userd;
   if (error) return { error: error };
 
