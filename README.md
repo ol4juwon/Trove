@@ -4,8 +4,8 @@
 
 ### Tools
 
-**Nodejs**
-**Puppeteer**
-**Mongodb**
-**NanoID**
-**Paystack Api**
+- **Nodejs**
+- **Puppeteer**
+- **Mongodb**
+- **NanoID**
+- **Paystack Api**
