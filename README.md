@@ -6,6 +6,6 @@
 
 - **Nodejs**
 - **Puppeteer**
-- **Mongodb**
-- **NanoID**
-- **Paystack Api**
+- **Mongodb** - NOSQL DB
+- **NanoID** - UNIQUE ID GENERATOR
+- **Paystack Api**- Payment test bed
