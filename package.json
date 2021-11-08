@@ -5,7 +5,7 @@
   "private": "true",
   "main": "App.js",
   "scripts": {
-    "start": "app.js",
+    "start": "./App.js",
     "test": "jest --watchAll --verbose --env=node"
   },
   "jest": {
