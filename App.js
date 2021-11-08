@@ -5,7 +5,7 @@ const rateLimit = require('express-rate-limit');
 
 let express = require('express')
 const app = express()
-const debug = require('debug')('app:debug')
+// const debug = require('debug')('app:debug')
 const cors = require('cors')
 const moment  = require("moment")
 const limiter = rateLimit({
