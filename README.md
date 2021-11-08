@@ -1,6 +1,6 @@
 # Trove Test
 ## Hosted on Heroku 
-[trovetest](throvetest.herokuapp.com)
+[trovetest](https://throvetest.herokuapp.com)
 
 ## Tools
 
