@@ -105,8 +105,8 @@ exports.createUser = async (payload) => {
 
   const userd = await user.save();
   console.log("Done ser ",userd);
-  const { error, data } = userd;
+  const { error } = userd;
   if (error) return { error: error };
 
-  return { data: data };
+  return { data: userd };
 };
