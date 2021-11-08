@@ -5,7 +5,7 @@
   "private": "true",
   "main": "App.js",
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "app.js",
     "test": "jest --watchAll --verbose --env=node"
   },
   "jest": {
