@@ -42,7 +42,7 @@ const setupExpress = () => {
 
     const server = http.createServer(app);
 
-    const port = normalizePort(process.env.Port || '4000');
+    const port = normalizePort(process.env.PORT || '4000');
     app.set('port', port);
     console.log("Starting up Products", port, process.env.APP_NAME);
 
