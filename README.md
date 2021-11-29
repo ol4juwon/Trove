@@ -9,3 +9,8 @@
 - **Mongodb** - NOSQL DB
 - **NanoID** - UNIQUE ID GENERATOR
 - **Paystack Api**- Payment test bed
+
+## WIP TASKS
+- [ ] 2FA SMS
+- [ ] 2FA EMAIL
+- [ ] Improve on loan payment routine and 
