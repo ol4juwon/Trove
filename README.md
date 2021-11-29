@@ -13,4 +13,7 @@
 ## WIP TASKS
 - [ ] 2FA SMS
 - [ ] 2FA EMAIL
-- [ ] Improve on loan payment routine and 
+- [ ] Improve on loan payment routine.
+- [ ] Improve on next payment cron job algorithm
+- [ ] Enable Bvn verification
+- [ ] Add NGN Bank Account
